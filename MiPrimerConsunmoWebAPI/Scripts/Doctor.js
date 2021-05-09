@@ -4,7 +4,7 @@
 
 
 function ListarDoctor() {
-    fetch("http://192.168.250.6:8081/api/Doctor")
+    fetch("http://192.168.250.11:8081/api/Doctor")
         .then(res => res.json())
         .then(res => {
             CrearListado(res);
@@ -41,7 +41,7 @@ function ListarDoctor() {
             contenido += "<td>" + res[i].nombreEspecialidad + "</td>";
             contenido += "<td>" + res[i].email + "</td>";
             contenido += "<td>";
-            contenido += "<button class='btn btn-primary'>Editar</button>";
+            contenido += "<button onclick='AbrirModal(" + res[i].iidDoctor +")' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal'>Editar</button>";
             contenido += "<button class='btn btn-danger'>Eliminar</button>";
             contenido += "</td>";
             contenido += "</tr>";
@@ -53,4 +53,26 @@ function ListarDoctor() {
 
         document.getElementById("divTabla").innerHTML = contenido;
 
+}
+
+function Limpiar() {
+    
+    var limpiar = document.getElementsByClassName("limpiar");
+    //alert("Limpiar");
+    var nlimpiar = limpiar.length;
+    
+    for (var i = 0; i < nlimpiar; i++) {
+        limpiar[i].Value = "";
+        alert("Limpiar");
     }
+}
+
+function AbrirModal(id) {
+    Limpiar();
+    if (id==0) {
+        document.getElementById("lblTitulo").innerHTML = "Agregar Doctor";
+    }
+    else {
+        document.getElementById("lblTitulo").innerHTML = "Editar Doctor";
+    }
+}
