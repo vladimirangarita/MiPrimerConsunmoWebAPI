@@ -37,7 +37,6 @@ function LlenarComboEspecialidad(res) {
     document.getElementById("cboEspecialidad").innerHTML = contenido;
 }
 function previewImage() {
-    debugger
     var fupFoto = document.getElementById("fupFoto");
     fupFoto.onchange = function () {
         //Foto Elegida
@@ -136,8 +135,16 @@ function Limpiar() {
 }
 var nombreArchivo;
 function Guardar() {
-    if (confirm("Guardar?")==1) {
+    if (confirm("Guardar?") == 1) {
 
+        var objeto = DatosObligatorios();
+        if (objeto.exito==false) {
+            var contenido = objeto.contenido;
+            document.getElementById("divError").innerHTML = contenido;
+            return;
+        }
+
+        document.getElementById("divError").innerHTML = "";
         var idDoctor = document.getElementById("txtIdDoctor").value;
         var nombre = document.getElementById("txtNombre").value;
         var apPaterno = document.getElementById("txtApPaterno").value;
@@ -148,7 +155,7 @@ function Guardar() {
         var telefonoCelular = document.getElementById("txtTelefonoCelular").value;
         var sueldo = document.getElementById("txtsueldo").value;
         var fechaContrato = document.getElementById("txtFechaContrato").value;
-        var foto = document.getElementById("fupFoto").src;
+        var foto = document.getElementById("imgFoto").src;
 
         //alert("");
         var cboSexo;
@@ -160,9 +167,9 @@ function Guardar() {
         }
 
 
-        if (foto!=null) {
-             nombreArchivo = document.getElementById("fupFoto").files[0].name;
-        }
+        //if (foto!=null) {
+        //     nombreArchivo = document.getElementById("fupFoto").files[0].name;
+        //}
        
         fetch("http://192.168.250.10:8081/api/Doctor", {
 
@@ -194,7 +201,7 @@ function Guardar() {
                 if (res == 1) {
                     alert("Correcto");
                     ListarDoctor();
-                    document.getElementById("btnclose").click();
+                    document.getElementById("btnClose").click();
                 } else {
 
                     alert("Ocurrio un error");
@@ -204,6 +211,25 @@ function Guardar() {
 
     }
 }
+
+    function DatosObligatorios() {
+
+        var obligatorios = document.getElementsByClassName("obligatorio");
+        var nobligatorios = obligatorios.length;
+        var obligatorio;
+        var exito = true;
+        var contenido = "<ol style='color:red'>";
+        for (var i = 0; i < nobligatorios; i++) {
+            if (obligatorios[i].value=="") {
+                exito = false;
+                contenido += "<li>" + obligatorios[i].name +"es obligatorio</li>"
+
+            }
+        }
+
+        contenido += "</ol>"
+        return { exito, contenido };
+                                 }
 
 function AbrirModal( id) {
     Limpiar();
@@ -235,8 +261,11 @@ function AbrirModal( id) {
                 if (res.iidSexo == 1) rbSexoMascu.checked = true;
                 else rbSexoFeme.checked = true;
 
+                document.getElementById("txtFechaContrato").value = res.fechaContrato.substr(0, 10);
+                //document.getElementById.("imgFoto").src = res.archivo;
+                nombreArchivo = res.nombreArchivo;
              
-                
+                //previewImage();
 
             });
         document.getElementById("lblTitulo").innerHTML = "Editar Doctor";

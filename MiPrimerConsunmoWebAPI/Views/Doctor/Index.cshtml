@@ -26,33 +26,33 @@
 
                 <div class="form-group">
                     <label>Id Doctor</label>
-                    <input class="limpiar form-control" type="text" id="txtIdDoctor" readonly />
+                    <input  name="Id Doctor" class="limpiar form-control" type="text" id="txtIdDoctor" readonly />
                 </div>
 
-                <div class="form-group">
+                <div class="form-group obligatorio">
                     <label>Nombre</label>
-                    <input type="text" id="txtNombre"  class="limpiar form-control" />
+                    <input name="Nombre Doctor" type="text" id="txtNombre"  class="limpiar form-control obligatorio" />
                 </div>
 
-                <div class="form-group">
+                <div class="form-group obligatorio">
                     <label>Apellido Paterno</label>
-                    <input type="text" id="txtApPaterno" class="limpiar form-control" />
+                    <input name="Apellido Paterno" type="text" id="txtApPaterno" class="limpiar form-control obligatorio" />
                 </div>
 
-                <div class="form-group">
+                <div class="form-group obligatorio">
                     <label>Apellido Materno</label>
-                    <input type="text" id="txtApMaterno" class="form-control limpiar" />
+                    <input name="Apellido Materno" type="text" id="txtApMaterno" class="form-control limpiar" />
                 </div>
 
                 <div class="form-group">
                     <label>Nombre Clinica</label>
-                    <select id="cboClinica" class="form-control limpiar"></select>
+                    <select name="Nombre Clinica" id="cboClinica" class="form-control limpiar"></select>
 
                 </div>
 
                 <div class="form-group">
                     <label>Nombre Especialidad</label>
-                    <select id="cboEspecialidad" class="form-control limpiar"></select>
+                    <select name="Nombre Esécialidad" id="cboEspecialidad" class="form-control limpiar"></select>
 
                 </div>
 
@@ -77,12 +77,12 @@
 
                 <div class="form-group">
                     <label>Sueldo</label>
-                    <input type="text" id="txtsueldo" class="form-control limpiar" />
+                    <input type="text" name="Sueldo" id="txtsueldo" class="form-control limpiar obligatorio" />
                 </div>
 
-                <div class="form-group">
+                <div class="form-group ">
                     <label>Fecha Contrato</label>
-                    <input type="date" id="txtFechaContrato" class="form-control limpiar" />
+                    <input name="Fecha Contrato" type="date" id="txtFechaContrato" class="form-control limpiar obligatorio" />
                 </div>
 
                 <div class="form-group">
@@ -94,9 +94,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button"onclick="Guardar()" class="btn btn-primary">Aceptar</button>
-                <button id="btnclose" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="btnClose" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 
             </div>
+
+            <div id="divError">
+            
+            </div>
+
         </div>
     </div>
 </div>
